@@ -50,8 +50,18 @@ class Admin extends Authenticatable
         'password' => 'hashed',
     ];
 
+    //SCOPE
+    public function scopeActive($query){
+        return $query->where('iud_status','i');
+    }
+
+    //EAGER LOADING
+    protected $with = ['role'];
+    
+
+    //ELOQUENT RELATIONSHIP
     public function role(){
-        return $this->belongsTo(Role::class, 'role_id');
+        return $this->belongsTo(AdminRole::class, 'role_id');
     }
 }
 

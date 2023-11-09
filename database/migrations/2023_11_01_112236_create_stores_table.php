@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->float('lat')->nullable();
             $table->float('lng')->nullable();
-            $table->string('iud_status',1)->default('d');
+            $table->string('iud_status',1)->default('i');
             $table->integer('plastic_product_id')->nullable();
             $table->string('branch_code')->nullable();
             $table->integer('enable_deficit')->nullable();

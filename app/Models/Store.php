@@ -13,5 +13,5 @@ class Store extends Model
     
     protected $table = 'store';
 
-    protected $guraded = ['store_id'];
+    protected $guarded = ['store_id'];
 }

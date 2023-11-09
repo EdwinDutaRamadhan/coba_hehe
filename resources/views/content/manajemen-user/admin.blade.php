@@ -1,42 +1,26 @@
 @extends('layout.main')
 
 @section('title')
-    <title>Dashboard</title>
+    Admin
 @endsection
+
+@push('css')
+@endpush
 
 @section('content')
     {{-- top navbar --}}
 
     @include('partials.navbar')
 
+
+
     {{-- top navbar --}}
 
     {{-- main content --}}
 
-    <div class="main-content">
-        <div class="row">
-            <div class="col-md-12 ">
-                <div class="table-wrapper"
-                    style="border-radius: 18px;background: #e0e0e0;box-shadow:  8px 8px 16px #bebebe,-8px -8px 16px #ffffff;">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-6 align-items-start">
-                                <h2 class="ml-lg-2">Admin</h2>
-                            </div>
-                            <div class="col-sm-6 align-items-end">
-                                <a href="#addModal" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#addModal">
-                                    <i class="material-icons">&#xE147;</i>
-                                    <span>Admin</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+    @livewire('table-admin')
 
-                </div>
-            </div>
-        </div>
-    </div>
+
     {{-- main content --}}
 
 
@@ -55,11 +39,85 @@
                         </button> --}}
                     </div>
                     <div class="modal-body">
-                        <h4 class="modal-title mb-4">Buat Admin</h4>
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" class="form-control" name="name" required>
-                        </div>
+                        <form action="{{ route('manajemen-user.admin.store') }}" method="post">
+                            @csrf
+                            <h4 class="modal-title mb-4">Buat Admin</h4>
+                            <div class="row">
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="name_add">Name</label>
+                                        <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                            name="name" id="name_add" value="{{ old('name') }}">
+                                        @error('name')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="email_add">Email</label>
+                                        <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                            name="email" id="email_add" value="{{ old('email') }}"
+                                            placeholder="alfamidi@gmail.com">
+                                        @error('email')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="password_add">Password</label>
+                                        <input type="password"
+                                            class="form-control @error('password') is-invalid @enderror" name="password"
+                                            id="password_add">
+                                        @error('password')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="password_confirmation_add">Password</label>
+                                        <input type="password"
+                                            class="form-control @error('password_confirmation') is-invalid @enderror"
+                                            name="password_confirmation" id="password_confirmation_add">
+                                        @error('password_confirmation')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 mb-3">
+                                    <div class="form-group">
+                                        <label for="role">Role</label>
+                                        <select class="form-select" aria-label="Default select example" name="role">
+                                            @foreach ($role as $r)
+                                                @if (old('role') !== null)
+                                                    @if (old('role') == $r->role_id)
+                                                        <option value="{{ old('role') }}" selected>{{ $r->name }}
+                                                        </option>
+                                                    @endif
+                                                @else
+                                                    <option value="{{ $r->role_id }}">{{ $r->name }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     <div class="modal-footer" style="border-radius: 10px;background-color: #E11D37;">
                         <button class="btn btn-outline-light" style="border-radius: 10px;" type="button"
@@ -79,3 +137,33 @@
 
     {{-- footer --}}
 @endsection
+
+@push('js')
+    @if ($errors->any())
+        <script>
+            var myModal = new bootstrap.Modal(document.getElementById('addModal'))
+            myModal.show();
+        </script>
+    @endif
+
+    <script>
+        function remove() {
+            const form = $('#form_remove_' + arguments[0]);
+            swal({
+                    title: `Apakah anda yakin ingin menghapus data ini?`,
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        event.preventDefault();
+                        form.submit();
+                        eksekusi();
+                    }
+                });
+        }
+        const obj = {{ Js::from($data) }};
+    </script>
+
+@endpush

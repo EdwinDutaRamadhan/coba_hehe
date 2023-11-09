@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('email')->unique();
             $table->rememberToken();
-            $table->string('uid_status')->default('i');
+            $table->string('iud_status',1)->default('i');
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });

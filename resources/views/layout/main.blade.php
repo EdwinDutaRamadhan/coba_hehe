@@ -11,7 +11,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    @yield('title', 'CMS ALFAMIDIKRING')
+    <title>@yield('title', 'CMS ALFAMIDIKRING')</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min-5.css') }}">
     <!----css3---->
@@ -37,7 +37,7 @@
 </head>
 
 <body>
-    {{-- @include('sweetalert::alert') --}}
+    @include('sweetalert::alert')
 
     <div class="wrapper">
 
@@ -78,6 +78,15 @@
             });
 
         });
+
+        function eksekusi() {
+            swal({
+                title: `Tunggu sebentar yaa`,
+                icon: "info",
+                buttons: false,
+                text: ' ',
+            })
+        }
     </script>
 
     

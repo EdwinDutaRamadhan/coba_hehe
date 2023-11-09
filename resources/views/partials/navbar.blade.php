@@ -7,7 +7,7 @@
                 </div>
             </div>
 
-            <div class="col-md-5 col-lg-3 order-3 order-md-2">
+            {{-- <div class="col-md-5 col-lg-3 order-3 order-md-2">
                 <div class="xp-searchbar">
                     <form>
                         <div class="input-group">
@@ -19,7 +19,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            </div> --}}
 
 
             <div class="col-10 col-md-6 col-lg-8 order-1 order-md-3 ms-auto">
@@ -46,11 +46,11 @@
                             </li>
 
                             <li class="dropdown nav-item">
-                                <a class="nav-link" href="#" data-toggle="dropdown" onclick="profile();">
+                                <a class="nav-link" href="{{ route('logout') }}" data-toggle="dropdown" onclick="">
                                     <img src="{{ asset('img/user.jpg') }}" style="width:30px; border-radius:50%;" />
                                     <span class="xp-user-live"></span>
                                 </a>
-                                <ul class="dropdown-menu small-menu">
+                                {{-- <ul class="dropdown-menu small-menu">
                                     <li><a href="#">
                                             <span class="material-icons">person_outline</span>
                                             Profile
@@ -65,7 +65,7 @@
                                         </a></li>
                                         {{-- <form action="{{ route('logout') }}" method="post" style="display:none;" id="form_logout">
                                             @csrf
-                                        </form> --}}
+                                        </form> --}} 
                                 </ul>
                             </li>
 
