@@ -67,14 +67,14 @@
                                 <tr>
                                     <td>{{ $d->name }}</td>
                                     @if ($d->iud_status == 'i')
-                                        <td class="text-center text-success"><a href="{{ route('pengaturan-stok.toko.stock',$d->store_id) }}">
+                                        <td class="text-center "><a href="{{ route('pengaturan-stok.toko.stock',$d->store_id) }}" class="text-success">
                                                 <i class="material-icons" role="button">warehouse</i></a>
                                         </td>
                                         <td><button style="border-radius: 12px;"
                                                 onclick="confirmStatus({{ $loop->index }},'menonaktifkan');"
                                                 class="btn btn-sm w-100 btn-success">Active</button></td>
                                     @else
-                                        <td class="text-center text-danger"><a href="{{ route('pengaturan-stok.toko.stock',$d->store_id) }}">
+                                        <td class="text-center "><a href="{{ route('pengaturan-stok.toko.stock',$d->store_id) }}" class="text-danger">
                                                 <i class="material-icons" role="button">warehouse</i></a>
                                         </td>
                                         <td><button style="border-radius: 12px;"

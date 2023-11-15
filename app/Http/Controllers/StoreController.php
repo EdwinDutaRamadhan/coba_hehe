@@ -67,7 +67,9 @@ class StoreController extends Controller
     public function stock(){
         // dd(request()->store_id);
         return view('content.pengaturan-stok.toko.stock',[
-            'store_id' => request()->store_id
+            'store_id' => request()->store_id,
+            'data' => Store::find(request()->store_id)->stock()->paginate(10),
+            'store' => Store::find(request()->store_id)
         ]);
     }
 
