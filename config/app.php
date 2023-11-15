@@ -70,8 +70,8 @@ return [
     |
     */
 
-    'timezone' => 'Asia/Jakarta',
-
+    // 'timezone' => 'Asia/Jakarta',
+    'timezone' => 'UTC',
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -84,6 +84,7 @@ return [
     */
 
     'locale' => 'id',
+    // 'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------

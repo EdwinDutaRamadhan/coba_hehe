@@ -9,6 +9,7 @@ use App\Models\PreorderCategory;
 class KategoriPreorder extends Component
 {
     public $search = '';
+    public $status;
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     
@@ -16,10 +17,14 @@ class KategoriPreorder extends Component
     {
         return view('livewire.kategori-preorder',[
             // 'data' => PreorderCategory::where('name', 'ILIKE', '%'.$this->search.'%')->active()->paginate(10)
-            'data' => PreorderCategory::where('name', 'ILIKE', '%'.$this->search.'%')->active()->simplePaginate(10)
+            'data' => PreorderCategory::where('name', 'ILIKE', '%'.$this->search.'%')
+            ->when($this->status == 'active', fn($query)=>$query->where('iud_status','i'))
+            ->when($this->status == 'inactive', fn($query)=>$query->where('iud_status','d'))
+            ->latest('updated_at')
+            ->simplePaginate(10)
         ]);
     }
-
+    
     public function updatingSearch()
     {
         $this->resetPage();

@@ -9,7 +9,7 @@
                         <div class="col-sm-2">
                             <div class="input-group">
                                 <select class="form-control" id="status" wire:model.live="status">
-                                    <option>Status</option>
+                                    <option>All</option>
                                     <option value="active">Active</option>
                                     <option value="inactive">Inactive</option>
                                 </select>
@@ -47,10 +47,13 @@
                                 <h2 class="ml-lg-2">Manajemen Produk</h2>
                             </div>
                             <div class="col-sm-6 align-items-end">
-                                    <a href="" class="btn btn-success">
-                                        <i class="material-icons">&#xE147;</i>
-                                        <span>Produk</span>
-                                    </a>
+                                    <form action="{{ route('manajemen-produk.productmass.create') }}" method="post">
+                                        @csrf
+                                        <button class="btn btn-success" type="submit">
+                                            <i class="material-icons">&#xE147;</i>
+                                            <span>Produk</span>
+                                        </button>
+                                    </form>
                             </div>
                         </div>
                     </div>
@@ -102,7 +105,7 @@
                                             @endif
                                         </div>
                                         <div class="p-2 bd-highlight">
-                                            <a href="" type="button"
+                                            <a href="{{ route('manajemen-produk.productmass.edit',Crypt::encryptString($d->product_id)) }}" type="button"
                                                 class="btn btn-sm btn-warning h-100">Update</a>
                                         </div>
                                         <div class="p-2 bd-highlight">

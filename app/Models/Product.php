@@ -34,6 +34,7 @@ class Product extends Model
         return $this->belongsTo(PreorderCategory::class, 'preorder_category_id');
     }
     
+    
     //SCOPE
     public function scopeActive($query) //Active Item
     {

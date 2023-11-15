@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-    <title>Dashboard</title>
+    Dashboard
 @endsection
 
 @section('content')

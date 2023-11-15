@@ -81,10 +81,10 @@
 
         function eksekusi() {
             swal({
-                title: `Tunggu sebentar yaa`,
+                title: `Permintaan Sedang Diproses`,
                 icon: "info",
                 buttons: false,
-                text: ' ',
+                text: 'Mohon tunggu sebentar',
             })
         }
     </script>

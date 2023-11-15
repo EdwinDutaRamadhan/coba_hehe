@@ -11,7 +11,7 @@ class StorePreorderCategoryRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,12 @@ class StorePreorderCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required|max:255',
+            'status' => 'required|max:1',
+            'min_day_est' => 'required|min:0',
+            'max_day_est' => 'required|min:0',
+            'start_time' => 'required',
+            'end_time' => 'required',
         ];
     }
 }

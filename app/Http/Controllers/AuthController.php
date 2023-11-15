@@ -29,7 +29,8 @@ class AuthController extends Controller
         }
        } catch (\Throwable $th) {
         //throw $th;
-        dd($th);
+        Alert::error("Terjadi Kesalahan", "Laporkan Pesan Ini ke IT HO");
+        Log::error($th);
        }
   
         return back();

@@ -2,7 +2,8 @@
 
 
 @push('css')
-    @livewireStyles
+    {{-- @livewireStyles --}}
+   
 @endpush
 
 @section('content')
@@ -10,5 +11,5 @@
 @endsection
 
 @push('js')
-    @livewireScripts
+    {{-- @livewireScripts --}}
 @endpush

@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdatePreorderCategoryRequest extends FormRequest
+class UpdateTagPluRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,11 +22,7 @@ class UpdatePreorderCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|max:255',
-            'status' => 'required|max:1',
-            'min_day_est' => 'required|min:0',
-            'max_day_est' => 'required|min:0',
-
+            //
         ];
     }
 }

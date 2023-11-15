@@ -42,8 +42,8 @@ class AdminRoleController extends Controller
                         'home' => true
                     ],
                     'manajemen-user' => [
-                        'admin' =>  request()->manajemen_user_admin ?? true ?? false,
-                        'admin-role' => request()->manajemen_user_admin_role ?? true ?? false,
+                        'admin' =>  isset(request()->manajemen_user_admin) ? true : false,
+                        'admin-role' => isset(request()->manajemen_user_admin_role) ? true : false,
                     ]
                 ],
                 'iud_status' => 'i'

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TagPlu;
 use App\Models\Product;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Crypt;
@@ -46,9 +47,14 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Product $product)
+    public function edit()
     {
-        //
+        $data = Product::find(Crypt::decryptString(request()->product_id));
+
+        return view('content.manajemen-produk.productmass.edit',[
+            'product' => Product::find(Crypt::decryptString(request()->product_id)),
+            'tag' => TagPlu::where('plu', $data->plu)->get()
+        ]);
     }
 
     /**
@@ -70,19 +76,19 @@ class ProductController extends Controller
                 Product::where('product_id', $destroy_token)->update([
                     'iud_status' => 'i'
                 ]);
-                Alert::html('Mengaktifkan berhasil', 'Product ' . request()->name . ' berhasil diaktifkan', 'success');
+                Alert::html('Mengaktifkan berhasil', 'Product <strong>' . request()->name . '</strong> berhasil diaktifkan', 'success');
             } else {
                 Product::where('product_id', $destroy_token)->update([
                     'iud_status' => 'd'
                 ]);
-                Alert::html('Menonaktifkan berhasil', 'Product ' . request()->name . ' berhasil dinonaktifkan', 'success');
+                Alert::html('Menonaktifkan berhasil', 'Product <strong>' . request()->name . '</strong> berhasil dinonaktifkan', 'success');
             }
         } catch (\Throwable $th) {
             //throw $th;
             if (request()->status == 'd') {
-                Alert::html('Mengaktifkan gagal', 'Product ' . request()->name . ' gagal diaktifkan', 'error');
+                Alert::html('Mengaktifkan gagal', 'Product <strong>' . request()->name . '</strong> gagal diaktifkan', 'error');
             } else {
-                Alert::html('Menonaktifkan gagal', 'Product ' . request()->name . ' gagal dinonaktifkan', 'error');
+                Alert::html('Menonaktifkan gagal', 'Product <strong>' . request()->name . '</strong> gagal dinonaktifkan', 'error');
             }
             Log::error($th);
         }

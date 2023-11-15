@@ -122,9 +122,9 @@
                 <i class="material-icons">storage</i>
                 <span>Pengaturan Stok</span>
             </a>
-            <ul class="collapse {{ Request::is('admin/pengaturan-stok/*') ? 'show' : '' }}" id="pengaturan_stok">
-                <li class=" ">
-                    <a href=""><i class="material-icons ps-4">local_grocery_store</i>
+            <ul class="collapse {{ Request::is('cms/pengaturan-stok/*') ? 'show' : '' }}" id="pengaturan_stok">
+                <li class=" {{ Request::segment(3) == 'toko' ? 'active' : '' }}  ">
+                    <a href=" {{ route('pengaturan-stok.toko.index') }}"><i class="material-icons ps-4">local_grocery_store</i>
                         <span>Toko</span></a>
                 </li>
 
