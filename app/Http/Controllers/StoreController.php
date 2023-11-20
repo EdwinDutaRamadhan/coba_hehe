@@ -32,6 +32,7 @@ class StoreController extends Controller
      */
     public function store(StoreStoreRequest $request)
     {       
+        dd($request->get('lat',0.0));
         try {
             Store::create([
                 'name' => $request->get('name'),
@@ -68,8 +69,6 @@ class StoreController extends Controller
         // dd(request()->store_id);
         return view('content.pengaturan-stok.toko.stock',[
             'store_id' => request()->store_id,
-            'data' => Store::find(request()->store_id)->stock()->paginate(10),
-            'store' => Store::find(request()->store_id)
         ]);
     }
 
@@ -78,8 +77,15 @@ class StoreController extends Controller
      */
     public function edit()
     {
+        try {
+            $id = Crypt::decryptString(request()->store_id);
+        } catch (\Throwable $th) {
+            //throw $th;
+            abort(404);
+            Log::error($th);
+        }
         return view('content.pengaturan-stok.toko.edit', [
-            'data' => Store::find(Crypt::decryptString(request()->store_id))
+            'data' => Store::find($id)
         ]);
     }
 

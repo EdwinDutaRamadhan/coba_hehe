@@ -124,12 +124,12 @@
                                 <div class="col-sm-6 mb-3">
                                     <label for="lat" class="form-label">Plant Latitude</label>
                                     <input name="lat" type="text" class="form-control" id="lat"
-                                        placeholder="0.0" value="0.0">
+                                        placeholder="0.0" value="{{ $data->lat ?? '0.0' }}">
                                 </div>
                                 <div class="col-sm-6 mb-3">
                                     <label for="lng" class="form-label">Plant Longitude</label>
                                     <input name="lng" type="text" class="form-control" id="lng"
-                                        placeholder="0.0" value="0.0">
+                                        placeholder="0.0" value="{{ $data->lng ?? '0.0' }}">
                                 </div>
                                 <div class="col-sm-12">
                                     <button type="submit" onclick="eksekusi();" class="btn btn-success">Update</button>

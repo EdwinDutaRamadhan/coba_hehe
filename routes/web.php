@@ -7,6 +7,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\PreorderCategoryController;
+use App\Http\Controllers\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/testing', fn()=>view('testing.paginate'));
+Route::post('/testing', function(){
+    dd(request());
+})->name('testing');
 //log
 Route::get('log-viewer/logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);
 
@@ -63,9 +67,11 @@ Route::group(['prefix' => 'cms','middleware'=>['auth']], function () {
 
         //PRODUCTMASS
         Route::get('/productmass', fn()=>view('content.manajemen-produk.productmass'))->name('manajemen-produk.productmass.index');
+        Route::post('/productmass', [ProductController::class, 'store'])->name('manajemen-produk.productmass.store');
+        Route::put('/productmass/update', [ProductController::class, 'update'])->name('manajemen-produk.productmass.update');
         Route::delete('/productmass/delete', [ProductController::class, 'destroy'])->name('manajemen-produk.productmass.destroy');
         
-        Route::post('/productmass/tambah', fn()=>view('content.manajemen-produk.productmass.tambah'))->name('manajemen-produk.productmass.create');
+        Route::get('/productmass/tambah', fn()=>view('content.manajemen-produk.productmass.tambah'))->name('manajemen-produk.productmass.create');
         Route::get('/productmass/edit/{product_id}',[ProductController::class, 'edit'])->name('manajemen-produk.productmass.edit');
         
         //KATEGORI PREORDER
@@ -83,10 +89,14 @@ Route::group(['prefix' => 'cms','middleware'=>['auth']], function () {
         // TOKO
         Route::get('/toko', fn()=>view('content.pengaturan-stok.toko.index'))->name('pengaturan-stok.toko.index');
         Route::get('/toko/tambah', fn()=>view('content.pengaturan-stok.toko.tambah'))->name('pengaturan-stok.toko.tambah');
+        Route::get('/toko/stock/{store_id}',fn()=>view('content.pengaturan-stok.toko.stock',['store_id' => request()->store_id,]))->name('pengaturan-stok.toko.stock');
         Route::get('/toko/edit/{store_id}',[StoreController::class, 'edit'])->name('pengaturan-stok.toko.edit');
-        Route::get('/toko/stock/{store_id}',[StoreController::class, 'stock'])->name('pengaturan-stok.toko.stock');
+
         Route::put('/toko/update',[StoreController::class, 'update'])->name('pengaturan-stok.toko.update');
+        Route::put('/toko/stock/update', [StockController::class, 'update'])->name('pengaturan-stok.toko.stock.update');
+
         Route::post('/toko/tambah', [StoreController::class, 'store'])->name('pengaturan-stok.toko.store');
+        
         Route::delete('/toko/delete', [StoreController::class, 'destroy'])->name('pengaturan-stok.toko.destroy');
         
     });

@@ -11,18 +11,13 @@
 
 @section('content')
     {{-- top navbar --}}
-
     @include('partials.navbar')
-
-
-
     {{-- top navbar --}}
     @livewire('productmass')
 @endsection
 
 @push('js')
     @livewireScripts
-
     <script>
         function remove() {
             const form = $('#form_remove_' + arguments[0]);

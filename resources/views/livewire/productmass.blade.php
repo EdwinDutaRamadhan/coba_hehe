@@ -47,13 +47,11 @@
                                 <h2 class="ml-lg-2">Manajemen Produk</h2>
                             </div>
                             <div class="col-sm-6 align-items-end">
-                                    <form action="{{ route('manajemen-produk.productmass.create') }}" method="post">
-                                        @csrf
-                                        <button class="btn btn-success" type="submit">
+                                    
+                                        <a href="{{ route('manajemen-produk.productmass.create') }}" class="btn btn-success" type="submit">
                                             <i class="material-icons">&#xE147;</i>
                                             <span>Produk</span>
-                                        </button>
-                                    </form>
+                                        </a>
                             </div>
                         </div>
                     </div>

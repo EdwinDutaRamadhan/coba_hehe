@@ -33,7 +33,45 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        try {
+            Product::create([
+                'name' => $request->get('name'),
+                'description' => $request->get('description'),
+                'brand_id' => $request->get('brand_id'),
+                'category_id' => $request->get('category_id'),
+                'preorder_category_id' => $request->get('preorder_category_id'),
+                'weight' => $request->get('weight',0),
+                'sku' => $request->get('sku'),
+                'plu' => $request->get('plu'),
+                'threshold' => $request->get('threshold',0),
+                'iud_status' => $request->get('status') == 1 ? 'i' : 'd', 
+            ]);
+            Alert::html('Insert berhasil', 'Product <strong>' . request()->name . '</strong> berhasil ditambahkan', 'success');
+        } catch (\Throwable $th) {
+            //throw $th;
+            Log::error($th);
+            Alert::html('Insert gagal', 'Product <strong>' . request()->name . '</strong> gagal ditambahkan', 'error');
+        }
+        if ($request->tags != null) {
+            //tags not null
+            $data = explode(',', $request->tags);
+            try {
+                for ($i = 0; $i < count($data); $i++) {
+                    TagPlu::updateOrCreate([
+                        'plu' => $request->plu,
+                        'value' => $data[$i]
+                    ], [
+                        'plu' => $request->plu,
+                        'value' => $data[$i],
+                        'iud_status' => 'i'
+                    ]);
+                }
+            } catch (\Throwable $th) {
+                //throw $th;
+                Log::error($th);
+            }
+        }
+        return to_route('manajemen-produk.productmass.index');
     }
 
     /**
@@ -49,11 +87,16 @@ class ProductController extends Controller
      */
     public function edit()
     {
-        $data = Product::find(Crypt::decryptString(request()->product_id));
-
-        return view('content.manajemen-produk.productmass.edit',[
-            'product' => Product::find(Crypt::decryptString(request()->product_id)),
-            'tag' => TagPlu::where('plu', $data->plu)->get()
+        // $data = Product::find(Crypt::decryptString(request()->product_id));
+        try {
+            $id = Crypt::decryptString(request()->product_id);
+        } catch (\Throwable $th) {
+            //throw $th;
+            Log::error($th);
+            abort(404);
+        }
+        return view('content.manajemen-produk.productmass.edit', [
+            'product' => Product::find($id)
         ]);
     }
 
@@ -62,7 +105,51 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, Product $product)
     {
-        //
+        $product_id = Crypt::decryptString($request->update_token);
+        try {
+            Product::where('product_id', $product_id)->update([
+                'name' => $request->get('name'),
+                'description' => $request->get('description'),
+                'brand_id' => $request->get('brand_id'),
+                'category_id' => $request->get('category_id'),
+                'preorder_category_id' => $request->get('preorder_category_id'),
+                'weight' => $request->get('weight',0),
+                'sku' => $request->get('sku'),
+                'plu' => $request->get('plu'),
+                'threshold' => $request->get('threshold',0),
+                'iud_status' => $request->get('status') == 1 ? 'i' : 'd', 
+            ]);
+            Alert::html('Update berhasil', 'Product <strong>' . request()->name . '</strong> berhasil diperbarui', 'success');
+        } catch (\Throwable $th) {
+            //throw $th;
+            Log::error($th);
+            Alert::html('Update gagal', 'Product <strong>' . request()->name . '</strong> gagal diperbarui', 'error');
+        }
+        if ($request->tags != null) {
+            //tags not null
+            $data = explode(',', $request->tags);
+            TagPlu::where('plu',$request->plu)->whereNotIn('value',$data)->delete();//delete if not exist
+            try {
+                for ($i = 0; $i < count($data); $i++) {
+                    TagPlu::updateOrCreate([//create if not exist and update if exist
+                        'plu' => $request->plu,
+                        'value' => $data[$i]
+                    ], [
+                        'plu' => $request->plu,
+                        'value' => $data[$i],
+                        'iud_status' => 'i'
+                    ]);
+                }
+            } catch (\Throwable $th) {
+                //throw $th;
+                Log::error($th);
+            }
+        }else{
+            if(TagPlu::where('plu',$request->plu)->exists()){
+                TagPlu::where('plu',$request->plu)->delete();
+            }
+        }
+        return to_route('manajemen-produk.productmass.index');
     }
 
     /**

@@ -35,4 +35,9 @@ class Productmass extends Component
     {
         $this->resetPage();
     }
+
+    public function updatingPaginate()
+    {
+        $this->resetPage();
+    }
 }
