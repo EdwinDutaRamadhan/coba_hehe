@@ -71,7 +71,7 @@ class ProductController extends Controller
                 Log::error($th);
             }
         }
-        return to_route('manajemen-produk.productmass.index');
+        return to_route('productmass.index');
     }
 
     /**
@@ -149,7 +149,7 @@ class ProductController extends Controller
                 TagPlu::where('plu',$request->plu)->delete();
             }
         }
-        return to_route('manajemen-produk.productmass.index');
+        return to_route('productmass.index');
     }
 
     /**

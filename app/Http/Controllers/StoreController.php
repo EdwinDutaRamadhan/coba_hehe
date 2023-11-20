@@ -116,7 +116,7 @@ class StoreController extends Controller
             Alert::html('Update gagal', 'Toko <strong>' . request()->name . '</strong> berhasil diperbarui', 'error');
             return back();
         }
-        return to_route('pengaturan-stok.toko.index');
+        return to_route('store.index');
     }
 
     /**

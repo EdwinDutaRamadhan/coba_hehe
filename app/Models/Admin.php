@@ -61,7 +61,7 @@ class Admin extends Authenticatable
 
     //ELOQUENT RELATIONSHIP
     public function role(){
-        return $this->belongsTo(AdminRole::class, 'role_id');
+        return $this->belongsTo(Role::class, 'role_id');
     }
 }
 

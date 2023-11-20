@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class RoleAccess extends Model
 {
     use HasFactory;
+
+    //MODEL CONFIG
+    protected $table = 'role_access';
 }

@@ -23,7 +23,7 @@ class AuthController extends Controller
             request()->session()->regenerate();
             // toast("Welcome back " . Auth::user()->name, "success");
             Alert::success("Login successful", "Welcome back " . Auth::user()->name);
-            return redirect()->intended('cms/dashboard/home');
+            return redirect()->intended('cms/dashboard');
         } else {
             Alert::error("Login failed", "Username or password incorrect");
         }
