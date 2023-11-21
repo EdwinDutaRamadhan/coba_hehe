@@ -16,7 +16,7 @@
 
 
     {{-- top navbar --}}
-    @livewire('kategori-preorder')
+    @livewire('manajemen-produk.kategori-preorder.index')
 
     <!-- Preorder Add-->
     <form action="{{ route('manajmen-produk.kategori-preorder.store') }}" method="post">

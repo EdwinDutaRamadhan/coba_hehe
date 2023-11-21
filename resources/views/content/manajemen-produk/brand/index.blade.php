@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-    Kategori Produk
+    Brand
 @endsection
 
 @push('css')
@@ -13,10 +13,10 @@
 
     @include('partials.navbar')
 
-
-
     {{-- top navbar --}}
-    @livewire('kategori-produk')
+
+
+    @livewire('manajemen-produk.brand.index')
     
 @endsection
 

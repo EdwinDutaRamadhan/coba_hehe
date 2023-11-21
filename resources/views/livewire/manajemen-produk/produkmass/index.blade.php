@@ -26,7 +26,7 @@
                         </div>
                         <div class="col-sm-8">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search" wire:model.live="search">
+                                <input maxlength="10" type="text" class="form-control" placeholder="Search" maxlength="15" wire:model.live="search">
                                 <div class="input-group-append">
                                     <button class="btn " style="height: 36px;" type="submit" id="button-addon2">Go
                                     </button>

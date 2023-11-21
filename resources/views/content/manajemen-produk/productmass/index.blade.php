@@ -13,7 +13,7 @@
     {{-- top navbar --}}
     @include('partials.navbar')
     {{-- top navbar --}}
-    @livewire('productmass')
+    @livewire('manajemen-produk.produkmass.index')
 @endsection
 
 @push('js')

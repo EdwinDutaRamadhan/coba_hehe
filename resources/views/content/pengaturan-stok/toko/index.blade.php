@@ -13,7 +13,7 @@
 
     {{-- main content --}}
 
-    @livewire('store-table')
+    @livewire('pengaturan-stok.toko.index')
     
     {{-- main content --}}
 

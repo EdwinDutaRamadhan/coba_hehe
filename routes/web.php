@@ -64,16 +64,17 @@ Route::group(['prefix' => 'cms','middleware'=>['auth']], function () {
         Route::get('/test', fn()=>view('testing.test-sidebar'))->name('customer.index');
         
     });
+    
     // MANAJEMEN PRODUK
     Route::group(['prefix'=>'manajemen-produk'], function(){
         //KATEGORI PRODUK
-        Route::get('/productcategory', fn()=>view('content.manajemen-produk.kategori-produk'))->name('productcategory.index');
+        Route::get('/productcategory', fn()=>view('content.manajemen-produk.kategori-produk.index'))->name('productcategory.index');
 
         //BRAND
-        Route::get('/brand', fn()=>view('content.manajemen-produk.brand'))->name('brand.index');
+        Route::get('/brand', fn()=>view('content.manajemen-produk.brand.index'))->name('brand.index');
 
         //PRODUCTMASS
-        Route::get('/productmass', fn()=>view('content.manajemen-produk.productmass'))->name('productmass.index');
+        Route::get('/productmass', fn()=>view('content.manajemen-produk.productmass.index'))->name('productmass.index');
         Route::post('/productmass', [ProductController::class, 'store'])->name('manajemen-produk.productmass.store');
         Route::put('/productmass/update', [ProductController::class, 'update'])->name('manajemen-produk.productmass.update');
         Route::delete('/productmass/delete', [ProductController::class, 'destroy'])->name('manajemen-produk.productmass.destroy');
@@ -82,13 +83,13 @@ Route::group(['prefix' => 'cms','middleware'=>['auth']], function () {
         Route::get('/productmass/edit/{product_id}',[ProductController::class, 'edit'])->name('manajemen-produk.productmass.edit');
         
         //KATEGORI PREORDER
-        Route::get('/kategoripreorder', fn()=>view('content.manajemen-produk.kategori-preorder.kategori-preorder'))->name('kategoripreorder.index');
+        Route::get('/kategoripreorder', fn()=>view('content.manajemen-produk.kategori-preorder.index'))->name('kategoripreorder.index');
         Route::post('/kategoripreorder', [PreorderCategoryController::class,'store'])->name('manajmen-produk.kategori-preorder.store');
         Route::put('/kategoripreorder/update', [PreorderCategoryController::class,'update'])->name('manajmen-produk.kategori-preorder.update');
         Route::delete('/kategoripreorder/delete', [PreorderCategoryController::class, 'destroy'])->name('manajemen-produk.kategori-preorder.destroy');
 
         //MERK
-        Route::get('/merk', fn()=>view('content.manajemen-produk.merk'))->name('merk.index');
+        Route::get('/merk', fn()=>view('content.manajemen-produk.merk.index'))->name('merk.index');
     });
 
     // PENGATURAN STOK

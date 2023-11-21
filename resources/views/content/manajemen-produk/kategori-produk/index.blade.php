@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-    Merk
+    Kategori Produk
 @endsection
 
 @push('css')
@@ -13,10 +13,10 @@
 
     @include('partials.navbar')
 
+
+
     {{-- top navbar --}}
-
-
-    @livewire('merk')
+    @livewire('manajemen-produk.kategori-produk.index')
     
 @endsection
 

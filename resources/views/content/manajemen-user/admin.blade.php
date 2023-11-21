@@ -18,7 +18,7 @@
 
     {{-- main content --}}
 
-    @livewire('table-admin')
+    @livewire('manajemen-user.admin.index')
 
 
     {{-- main content --}}

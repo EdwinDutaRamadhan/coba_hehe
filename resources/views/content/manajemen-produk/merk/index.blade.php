@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('title')
-    Brand
+    Merk
 @endsection
 
 @push('css')
@@ -16,7 +16,7 @@
     {{-- top navbar --}}
 
 
-    @livewire('brand')
+    @livewire('manajemen-produk.merk.index')
     
 @endsection
 

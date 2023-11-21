@@ -106,6 +106,7 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product)
     {
         $product_id = Crypt::decryptString($request->update_token);
+        $status = false;
         try {
             Product::where('product_id', $product_id)->update([
                 'name' => $request->get('name'),
@@ -120,12 +121,13 @@ class ProductController extends Controller
                 'iud_status' => $request->get('status') == 1 ? 'i' : 'd', 
             ]);
             Alert::html('Update berhasil', 'Product <strong>' . request()->name . '</strong> berhasil diperbarui', 'success');
+            $status = true;
         } catch (\Throwable $th) {
             //throw $th;
             Log::error($th);
             Alert::html('Update gagal', 'Product <strong>' . request()->name . '</strong> gagal diperbarui', 'error');
         }
-        if ($request->tags != null) {
+        if ($request->tags != null && $status) {
             //tags not null
             $data = explode(',', $request->tags);
             TagPlu::where('plu',$request->plu)->whereNotIn('value',$data)->delete();//delete if not exist

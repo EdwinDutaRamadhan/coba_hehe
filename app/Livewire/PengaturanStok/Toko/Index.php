@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\PengaturanStok\Toko;
 
 use App\Models\Store;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class StoreTable extends Component
+class Index extends Component
 {
     public $search = '';
     public $status = '';
@@ -14,9 +14,10 @@ class StoreTable extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
+    
     public function render()
     {
-        return view('livewire.store-table',[
+        return view('livewire.pengaturan-stok.toko.index',[
             'data' => Store::where('name','ILIKE','%'.$this->search.'%')
             ->when($this->status == 'active', fn($query)=>$query->where('iud_status', 'i'))
             ->when($this->status == 'inactive', fn($query)=>$query->where('iud_status', 'd'))
