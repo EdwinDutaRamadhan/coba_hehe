@@ -32,7 +32,7 @@
                                     <h2 class="ml-lg-2">Informasi Toko</h2>
                                 </div>
                                 <div class="col-sm-6 align-items-end">
-                                    <a href="{{ route('pengaturan-stok.toko.index') }}" class="btn btn-outline-light"
+                                    <a href="{{ route('store.index') }}" class="btn btn-outline-light"
                                         style="border-radius: 10px;">
                                         <i class="material-icons">arrow_back_ios_new</i>
                                         <span>Back</span>

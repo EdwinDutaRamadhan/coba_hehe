@@ -27,7 +27,7 @@ class Role extends Model
     }
 
     public function scopeActive($q){
-        return $q->with('iud_status','i');
+        return $q->where('iud_status','i');
     }
     
     //ELOQUENT RELATIONSHIP

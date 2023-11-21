@@ -24,7 +24,7 @@
                                 <a href="{{ route($c->route_name) }}">
                                     {{-- <i class="material-icons ps-4">folder_shared</i> --}}
                                     <i class="{{ $c->icon_name }} fs-4 ps-4" style="width: 48px;"></i>
-                                    <span>{{ $c->name }}</span></a>
+                                    <span style="font-size: 13px;">{{ $c->name }}</span></a>
                             </li>
                         @endforeach
                         {{-- strtolower(str_replace('-',' ',$sidebar->name)) --}}

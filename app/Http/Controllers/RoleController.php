@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use Illuminate\Support\Facades\Log;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RoleController extends Controller
 {
@@ -13,7 +15,9 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
+        return view('content.manajemen-user.admin-role', [
+            'data' => Role::active()->paginate(10)
+        ]);
     }
 
     /**
@@ -29,7 +33,28 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        //
+        try {
+            Role::create([
+                'name' => request()->name,
+                'access' => [
+                    'dashboard' => [
+                        'home' => true
+                    ],
+                    'manajemen-user' => [
+                        'admin' =>  isset(request()->manajemen_user_admin) ? true : false,
+                        'admin-role' => isset(request()->manajemen_user_admin_role) ? true : false,
+                    ]
+                ],
+                'iud_status' => 'i'
+            ]);
+            Alert::html('Tambah role berhasil', 'Role '.request()->name.' berhasil ditambahkan','success');
+        } catch (\Throwable $th) {
+            //throw $th;
+            //LOGGING & MODIFY RESPONSE
+            Log::error($th->getMessage());
+            Alert::html('Tambah role gagal', 'Role '.request()->name.' gagal ditambahkan','failed');
+        }
+        return back();
     }
 
     /**

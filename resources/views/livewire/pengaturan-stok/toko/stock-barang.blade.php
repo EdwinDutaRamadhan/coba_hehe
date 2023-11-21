@@ -98,7 +98,7 @@
                                 <span>Update Excel</span>
                             </a>
                             {{-- <a href="{{ route('pengaturan-stok.toko.index') }}" class="btn btn-outline-light" --}}
-                            <a href="{{ route('pengaturan-stok.toko.index') }}" class="btn btn-outline-light"
+                            <a href="{{ route('store.index') }}" class="btn btn-outline-light"
                                             style="border-radius: 10px;">
                                             <i class="material-icons">arrow_back_ios_new</i>
                                             <span>Back</span>

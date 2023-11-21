@@ -7,6 +7,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\PreorderCategoryController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StockController;
 
 /*
@@ -55,7 +56,7 @@ Route::group(['prefix' => 'cms','middleware'=>['auth']], function () {
         Route::post('/admin', [AdminController::class,'store'])->name('manajemen-user.admin.store');
         Route::delete('/admin/delete',[AdminController::class,'destroy'])->name('manajemen-user.admin.destroy');
         //ADMIN ROLE
-        Route::get('/role', [AdminRoleController::class,'index'])->name('role.index');
+        Route::get('/role', [RoleController::class,'index'])->name('role.index');
         Route::post('/role', [AdminRoleController::class,'store'])->name('manajemen-user.admin-role.store');
         Route::put('/role/update', [AdminRoleController::class,'update'])->name('manajemen-user.admin-role.update');
         Route::delete('/role/delete',[AdminRoleController::class,'destroy'])->name('manajemen-user.admin-role.destroy');
