@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminRoleController;
 use App\Http\Controllers\PreorderCategoryController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StockController;
+use App\Models\Feature;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,7 +43,7 @@ Route::get('/administrator/logout', [AuthController::class,'logout'])->middlewar
 
 
 
-Route::group(['prefix' => 'cms','middleware'=>['auth']], function () {
+Route::group(['prefix' => 'cms','middleware'=>['auth','author']], function () {
 
     // DASHBOARD
     Route::group(['prefix' => 'dashboard'], function () {
@@ -56,15 +57,15 @@ Route::group(['prefix' => 'cms','middleware'=>['auth']], function () {
         Route::post('/admin', [AdminController::class,'store'])->name('manajemen-user.admin.store');
         Route::delete('/admin/delete',[AdminController::class,'destroy'])->name('manajemen-user.admin.destroy');
         //ADMIN ROLE
-        Route::get('/role', [RoleController::class,'index'])->name('role.index');
-        Route::post('/role', [AdminRoleController::class,'store'])->name('manajemen-user.admin-role.store');
+        Route::get('/role', fn()=>view('content.manajemen-user.admin-role.index'))->name('role.index');
+        Route::post('/role', [RoleController::class,'store'])->name('manajemen-user.admin-role.store');
         Route::put('/role/update', [AdminRoleController::class,'update'])->name('manajemen-user.admin-role.update');
         Route::delete('/role/delete',[AdminRoleController::class,'destroy'])->name('manajemen-user.admin-role.destroy');
         //CUSTOMER
-        Route::get('/test', fn()=>view('testing.test-sidebar'))->name('customer.index');
+        Route::get('/customer', fn()=>view('testing.test-sidebar'))->name('customer.index');
         
     });
-    
+
     // MANAJEMEN PRODUK
     Route::group(['prefix'=>'manajemen-produk'], function(){
         //KATEGORI PRODUK
@@ -121,6 +122,10 @@ Route::group(['prefix' => 'cms','middleware'=>['auth']], function () {
 
     // POTONGAN HARGA
     Route::group(['prefix' => 'potongan-harga'], function(){
+
+        // foreach (Feature::childOnly(33) as $f) {
+        //     Route::get('/'.$f->route_prefix_name, fn()=>view('testing.test-sidebar'))->name($f->route_name);
+        // }
         //VOUCHER
         Route::get('/voucher', fn()=>view('testing.test-sidebar'))->name('voucher.index');
 
@@ -249,4 +254,5 @@ Route::group(['prefix' => 'cms','middleware'=>['auth']], function () {
     });
     
 });
+
 

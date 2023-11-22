@@ -12,7 +12,7 @@ class PreorderCategory extends Model
     //MODEL CONFIG
     protected $primaryKey = 'preorder_category_id';
     
-    protected $table = 'preorder_category';
+    protected $table = 'alfamidi.preorder_category';
 
     protected $guarded = ['preorder_category_id'];
 

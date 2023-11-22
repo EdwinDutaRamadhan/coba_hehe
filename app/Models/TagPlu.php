@@ -12,7 +12,7 @@ class TagPlu extends Model
     //MODEL CONFIG
     protected $primaryKey = 'tag_plu_id';
     
-    protected $table = 'tag_plu';
+    protected $table = 'alfamidi.tag_plu';
 
     protected $guarded  = ['tag_plu_id'];
 

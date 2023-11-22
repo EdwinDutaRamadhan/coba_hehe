@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\AdminRole;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Crypt;
@@ -34,27 +35,25 @@ class AdminRoleController extends Controller
      */
     public function store(StoreAdminRoleRequest $request)
     {
+        $status = false;
         try {
-            AdminRole::create([
+            $role = Role::create([
                 'name' => request()->name,
-                'access' => [
-                    'dashboard' => [
-                        'home' => true
-                    ],
-                    'manajemen-user' => [
-                        'admin' =>  isset(request()->manajemen_user_admin) ? true : false,
-                        'admin-role' => isset(request()->manajemen_user_admin_role) ? true : false,
-                    ]
-                ],
-                'iud_status' => 'i'
+                'iud_status' => 'i',
+                'warehouse_all' => false
             ]);
             Alert::html('Tambah role berhasil', 'Role '.request()->name.' berhasil ditambahkan','success');
+            $status = true;
         } catch (\Throwable $th) {
             //throw $th;
             //LOGGING & MODIFY RESPONSE
             Log::error($th->getMessage());
             Alert::html('Tambah role gagal', 'Role '.request()->name.' gagal ditambahkan','failed');
         }
+        if($status){
+            Role::find($role->role_id)->feature()->sync($request->tags);
+        }
+        
         return back();
     }
 

@@ -12,7 +12,7 @@ class Brand extends Model
     //MODEL CONFIG
     protected $primaryKey = 'brand_id';
     
-    protected $table = 'brand';
+    protected $table = 'alfamidi.brand';
 
     protected $guarded = ['brand_id'];
 

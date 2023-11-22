@@ -163,7 +163,6 @@
                     }
                 });
         }
-        const obj = {{ Js::from($data) }};
     </script>
 
 @endpush

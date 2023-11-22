@@ -12,7 +12,7 @@ class ProductCategory extends Model
     //MODEL CONFIG
     protected $primaryKey = 'category_id';
     
-    protected $table = 'product_category';
+    protected $table = 'alfamidi.product_category';
 
     protected $guarded = ['category_id'];
 

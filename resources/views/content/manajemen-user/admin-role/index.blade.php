@@ -32,46 +32,7 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th class="w-75">Name</th>
-                                <th class="w-25">Terakhir Diperbaharui</th>
-                                <th colspan="2" class="text-center">Action</th>
-                                {{-- <th style="min-width: 164px;">Created_at</th> --}}
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            @foreach ($data as $d)
-                                <tr>
-                                    <td>{{ $d->name }}</td>
-                                    <td>{{ $d->updated_at->diffForHumans() }}</td>
-                                    <td>
-                                        <i class="material-icons" data-toggle="tooltip" data-bs-toggle="modal"
-                                            data-bs-target="#editModal" onclick="update({{ $loop->index }})" role="button">edit</i>
-                                    </td>
-                                    <td><i class="material-icons" onclick="remove({{ $loop->index }});"
-                                            role="button">delete</i></td>
-                                    {{-- <td><a href="{{ route('panel.remove') }}"><i class="material-icons" data-confirm-delete="true">delete</i></a></td> --}}
-                                    {{-- <td>{{ $d->created_at }}</td> --}}
-                                    <form action="{{ route('manajemen-user.admin-role.destroy') }}" method="post"
-                                        style="display:none;" id="form_remove_{{ $loop->index }}">
-                                        @csrf
-                                        @method('DELETE')
-                                        <input type="hidden" name="delete_token"
-                                            value="{{ Crypt::encryptString($d->role_id) }}">
-                                        <input type="hidden" name="name" value="{{ $d->name }}">
-                                    </form>
-
-                                </tr>
-                            @endforeach
-
-                            <!----edit-modal end--------->
-                        </tbody>
-
-
-                    </table>
+                    @livewire('manajemen-user.admin-role.index')
                 </div>
             </div>
         </div>
@@ -96,14 +57,15 @@
                         <h4 class="modal-title mb-4">Tambah Role</h4>
                         <div class="form-group">
                             <label>Name</label>
-                            <input type="text" class="form-control" name="name" required>
+                            <input type="text" class="form-control" name="name">
                         </div>
                         <label for="">Akses</label>
                         <div class="row">
-                            <div class="col-sm-6">{{-- Dashboard --}}
+                            {{-- Dashboard --}}
+                            <div class="col-sm-6">
                                 <div class="form-check ">
-                                    <input class="form-check-input" onclick="parent('dashboard');"
-                                        type="checkbox" id="parent-dashboard" checked disabled>
+                                    <input class="form-check-input" name="tags[]" onclick="parent('dashboard');"
+                                        type="checkbox" id="parent-dashboard" checked value="6">
                                     <label class="form-check-label" for="parent-dashboard">
                                         Dashboard
                                     </label>
@@ -113,22 +75,22 @@
                                 {{-- Admin Panel --}}
                                 <div class="col-sm-6">
                                     <div class="form-check ">
-                                        <input class="form-check-input" onclick="parent('admin');" type="checkbox"
-                                            id="parent-admin" checked>
+                                        <input class="form-check-input" name="tags[]" onclick="parent('admin');" type="checkbox"
+                                            id="parent-admin" checked value="1">
                                         <label class="form-check-label" for="parent-admin">
                                             Manajemen User
                                         </label>
                                     </div>
                                     <div class="form-check ms-4">
-                                        <input name="manajemen_user_admin" class="form-check-input child-admin"
-                                            onclick="child('admin');" type="checkbox" id="admin" checked>
+                                        <input name="tags[]" class="form-check-input child-admin"
+                                            onclick="child('admin');" type="checkbox" id="admin" checked value="2">
                                         <label class="form-check-label" for="admin">
                                             Admin
                                         </label>
                                     </div>
                                     <div class="form-check ms-4">
-                                        <input name="manajemen_user_admin_role" class="form-check-input child-admin"
-                                            onclick="child('admin');" type="checkbox" id="admin_role" checked>
+                                        <input name="tags[]" class="form-check-input child-admin"
+                                            onclick="child('admin');" type="checkbox" id="admin_role" checked value="3">
                                         <label class="form-check-label" for="admin_role">
                                             Admin Role
                                         </label>
@@ -251,7 +213,7 @@
                     obj.checked = true;
                 }
                 bool += child[i].checked;
-                console.log(bool);
+                // console.log(bool);
             }
             if (bool == 0) {
                 obj.checked = false;
@@ -275,19 +237,18 @@
                 });
         }
 
-        function update(){
-            const data = obj.data[arguments[0]];
-            const access = data.access
-            console.log(access);
-            $('#name_update').val(data.name);
+        // function update(){
+        //     const data = obj.data[arguments[0]];
+        //     const access = data.access
+        //     console.log(access);
+        //     $('#name_update').val(data.name);
 
-            //Manajemen User
-            access['manajemen-user']['admin'] || access['manajemen-user']['admin-role'] ? $('#parent-admin-update').prop("checked", true) : $('#parent-admin-update').prop("checked", false); 
+        //     //Manajemen User
+        //     access['manajemen-user']['admin'] || access['manajemen-user']['admin-role'] ? $('#parent-admin-update').prop("checked", true) : $('#parent-admin-update').prop("checked", false); 
 
-            access['manajemen-user']['admin'] ? $('.form_update [name="manajemen_user_admin"]').prop("checked", true) : $('.form_update [name="manajemen_user_admin"]').prop("checked", false);
-            access['manajemen-user']['admin-role'] ? $('.form_update [name="manajemen_user_admin_role"]').prop("checked", true) : $('.form_update [name="manajemen_user_admin_role"]').prop("checked", false);
-        }
+        //     access['manajemen-user']['admin'] ? $('.form_update [name="manajemen_user_admin"]').prop("checked", true) : $('.form_update [name="manajemen_user_admin"]').prop("checked", false);
+        //     access['manajemen-user']['admin-role'] ? $('.form_update [name="manajemen_user_admin_role"]').prop("checked", true) : $('.form_update [name="manajemen_user_admin_role"]').prop("checked", false);
+        // }
 
-        const obj = {{ Js::from($data) }};
     </script>
 @endpush

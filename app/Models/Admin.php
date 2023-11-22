@@ -14,7 +14,7 @@ class Admin extends Authenticatable
 
     protected $primaryKey = 'admin_id';
 
-    protected $table = 'admin';
+    protected $table = 'alfamidi.admin';
     
     
     /**
@@ -63,5 +63,7 @@ class Admin extends Authenticatable
     public function role(){
         return $this->belongsTo(Role::class, 'role_id');
     }
+
+
 }
 

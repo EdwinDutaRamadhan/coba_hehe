@@ -14,7 +14,7 @@ class Product extends Model
     //MODEL CONFIG
     protected $primaryKey = 'product_id';
     
-    protected $table = 'product';
+    protected $table = 'alfamidi.product';
 
     protected $guarded = ['product_id'];
 

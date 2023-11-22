@@ -12,7 +12,7 @@ class Store extends Model
 
     protected $primaryKey = 'store_id';
     
-    protected $table = 'store';
+    protected $table = 'alfamidi.store';
 
     protected $guarded = ['store_id'];
 

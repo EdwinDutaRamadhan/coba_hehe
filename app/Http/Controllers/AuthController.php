@@ -18,7 +18,7 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-       try {
+ 
         if (Auth::attempt($credentials)) {
             request()->session()->regenerate();
             // toast("Welcome back " . Auth::user()->name, "success");
@@ -27,11 +27,6 @@ class AuthController extends Controller
         } else {
             Alert::error("Login failed", "Username or password incorrect");
         }
-       } catch (\Throwable $th) {
-        //throw $th;
-        Alert::error("Terjadi Kesalahan", "Laporkan Pesan Ini ke IT HO");
-        Log::error($th);
-       }
   
         return back();
     }

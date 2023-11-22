@@ -12,7 +12,7 @@ class Location extends Model
     //MODEL CONFIG
     protected $primaryKey = 'location_id';
     
-    protected $table = 'location';
+    protected $table = 'alfamidi.location';
 
     protected $guarded = ['location_id'];
 }

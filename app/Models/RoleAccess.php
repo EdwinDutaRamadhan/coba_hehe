@@ -10,5 +10,5 @@ class RoleAccess extends Model
     use HasFactory;
 
     //MODEL CONFIG
-    protected $table = 'role_access';
+    protected $table = 'alfamidi.role_access';
 }

@@ -74,10 +74,10 @@
                                             role="button">delete</i></td>
                                     {{-- <td><a href="{{ route('panel.remove') }}"><i class="material-icons" data-confirm-delete="true">delete</i></a></td> --}}
                                     {{-- <td>{{ $d->created_at }}</td> --}}
-                                    <form action="{{ route('manajemen-user.admin.destroy') }}" method="post"
+                                    <form action="{{ route('manajemen-user.admin.destroy') }}" method="POST"
                                         style="display:none;" id="form_remove_{{ $loop->index }}">
                                         @csrf
-                                        @method('DELETE')
+                                        <input type="hidden" name="_method" value="delete">
                                         <input type="hidden" name="delete_token"
                                             value="{{ Crypt::encryptString($d->admin_id) }}">
                                         <input type="hidden" name="name" value="{{ $d->name }}">

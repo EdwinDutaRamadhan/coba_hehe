@@ -19,9 +19,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('content.manajemen-user.admin', [
-            'data' => Admin::active()->paginate(10),
-            'role' => AdminRole::active()->get()
+        return view('content.manajemen-user.admin.index', [
+            'role' => Role::active()->get()
         ]);
     }
 

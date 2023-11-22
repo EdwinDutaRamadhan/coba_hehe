@@ -12,7 +12,7 @@ class Stock extends Model
 
     protected $primaryKey = 'stock_id';
     
-    protected $table = 'stock';
+    protected $table = 'alfamidi.stock';
 
     protected $guarded = ['stock_id'];
 

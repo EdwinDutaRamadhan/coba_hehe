@@ -12,7 +12,7 @@ class Merk extends Model
     //MODEL CONFIG
     protected $primaryKey = 'merk_id';
     
-    protected $table = 'merk';
+    protected $table = 'alfamidi.merk';
 
     protected $guarded = ['merk_id'];
 

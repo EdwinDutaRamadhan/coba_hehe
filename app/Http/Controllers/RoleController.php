@@ -15,7 +15,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('content.manajemen-user.admin-role', [
+        return view('content.manajemen-user.admin-role.index', [
             'data' => Role::active()->paginate(10)
         ]);
     }
@@ -33,27 +33,25 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
+        $status = false;
         try {
-            Role::create([
+            $role = Role::create([
                 'name' => request()->name,
-                'access' => [
-                    'dashboard' => [
-                        'home' => true
-                    ],
-                    'manajemen-user' => [
-                        'admin' =>  isset(request()->manajemen_user_admin) ? true : false,
-                        'admin-role' => isset(request()->manajemen_user_admin_role) ? true : false,
-                    ]
-                ],
-                'iud_status' => 'i'
+                'iud_status' => 'i',
+                'warehouse_all' => false
             ]);
             Alert::html('Tambah role berhasil', 'Role '.request()->name.' berhasil ditambahkan','success');
+            $status = true;
         } catch (\Throwable $th) {
             //throw $th;
             //LOGGING & MODIFY RESPONSE
-            Log::error($th->getMessage());
+            Log::error($th);
             Alert::html('Tambah role gagal', 'Role '.request()->name.' gagal ditambahkan','failed');
         }
+        if($status){
+            Role::find($role->role_id)->feature()->sync($request->tags);
+        }
+        
         return back();
     }
 

@@ -32,7 +32,6 @@ class StoreController extends Controller
      */
     public function store(StoreStoreRequest $request)
     {       
-        dd($request->get('lat',0.0));
         try {
             Store::create([
                 'name' => $request->get('name'),
@@ -54,7 +53,7 @@ class StoreController extends Controller
             Log::error($th);
             Alert::html('Insert gagal', 'Toko <strong>' . request()->name . '</strong> berhasil ditambahkan', 'error');
         }
-        return to_route('pengaturan-stok.toko.index');
+        return to_route('store.index');
     }
 
     /**
